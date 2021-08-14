@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v7.18.0 (2021-08-09)
+### Feature
+* Add support for non-prefixed tags ([#366](https://github.com/relekang/python-semantic-release/issues/366)) ([`0fee4dd`](https://github.com/relekang/python-semantic-release/commit/0fee4ddb5baaddf85ed6b76e76a04474a5f97d0a))
+
+### Documentation
+* Clarify second argument of ParsedCommit ([`086ddc2`](https://github.com/relekang/python-semantic-release/commit/086ddc28f06522453328f5ea94c873bd202ff496))
+
+## v7.17.0 (2021-08-07)
+### Feature
+* **parser:** Add scipy style parser ([#369](https://github.com/relekang/python-semantic-release/issues/369)) ([`51a3921`](https://github.com/relekang/python-semantic-release/commit/51a39213ea120c4bbd7a57b74d4f0cc3103da9f5))
+
+## v7.16.4 (2021-08-03)
+### Fix
+* Correct rendering of gitlab issue references ([`07429ec`](https://github.com/relekang/python-semantic-release/commit/07429ec4a32d32069f25ec77b4bea963bd5d2a00))
+
+## v7.16.3 (2021-07-29)
+### Fix
+* Print right info if token is not set (#360) ([#361](https://github.com/relekang/python-semantic-release/issues/361)) ([`a275a7a`](https://github.com/relekang/python-semantic-release/commit/a275a7a17def85ff0b41d254e4ee42772cce1981))
+
 ## v7.16.2 (2021-06-25)
 ### Fix
 * Use release-api for gitlab ([`1ef5cab`](https://github.com/relekang/python-semantic-release/commit/1ef5caba2d8dd0f2647bc51ede0ef7152d8b7b8d))
