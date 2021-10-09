@@ -36,11 +36,18 @@ def check_repo(func):
     return function_wrapper
 
 
+def get_formatted_tag(version):
+    """Get the version, formatted with `tag_format` config option"""
+    tag_format = config.get("tag_format")
+    return tag_format.format(version=version)
+
+
 @check_repo
 def get_commit_log(from_rev=None):
     """Yield all commit messages from last to first."""
     rev = None
     if from_rev:
+        from_rev = get_formatted_tag(from_rev)
         try:
             repo.commit(from_rev)
             rev = f"...{from_rev}"
@@ -196,11 +203,12 @@ def update_changelog_file(version: str, content_to_add: str):
 @LoggedFunction(logger)
 def tag_new_version(version: str):
     """
-    Create a new tag with the version number, prefixed with v.
+    Create a new tag with the version number, prefixed with v by default.
 
     :param version: The version number used in the tag as a string.
     """
-    return repo.git.tag("-a", f"v{version}", m=f"v{version}")
+    tag = get_formatted_tag(version)
+    return repo.git.tag("-a", tag, m=tag)
 
 
 @check_repo
