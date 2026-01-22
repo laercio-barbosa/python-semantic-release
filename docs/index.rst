@@ -1,109 +1,55 @@
-.. include:: ../README.rst
+Python Semantic Release
+***********************
 
+|PyPI Version| |conda-forge version| |Last Release| |Monthly Downloads| |PSR License| |Issues|
 
-Getting Started
-===============
+**Python Semantic Release (PSR)** provides an automated release mechanism
+determined by SemVer and Commit Message Conventions for your Git projects.
 
-If you haven't done so already, install Python Semantic Release following the
-instructions above.
+The purpose of this project is to detect what the next version of the
+project should be from parsing the latest commit messages. If the commit messages
+describe changes that would require a major, minor or patch version bump, PSR
+will automatically bump the version number accordingly. PSR, however, does not
+stop there but will help automate the whole release process. It will update the
+project code and distribution artifact, upload the artifact and post changelogs
+to a remotely hosted Version Control System (VCS).
 
-There is no strict requirement to have it installed locally if you intend on
-:ref:`using a CI service <automatic>`, however running with ``--noop`` can be
-useful to test your configuration.
+The tool is designed to run inside of a CI/CD pipeline service, but it can
+also be run locally.
 
-Setting up version numbering
-----------------------------
+This project was originally inspired by the `semantic-release`_ project for JavaScript
+by *Stephan Bönnemann*, but the codebases have significantly deviated since then, as
+PSR as driven towards the goal of providing flexible changelogs and simple initial setup.
 
-Create a variable set to the current version number.  This could be anywhere in
-your project, for example ``setup.py``::
+.. include:: concepts/installation.rst
 
-   from setuptools import setup
+Read more about the setup and configuration in our :ref:`Getting Started Guide <inline-getting-started-guide>`.
 
-   __version__ = "0.0.0"
+.. _semantic-release: https://github.com/semantic-release/semantic-release
 
-   setup(
-      name="my-package",
-      version=__version__,
-      # And so on...
-   )
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/python-semantic-release?label=PyPI&logo=pypi
+   :target: https://pypi.org/project/python-semantic-release/
+   :alt: pypi
 
-Python Semantic Release is configured using ``setup.cfg`` or ``pyproject.toml``.
-Set :ref:`config-version_variable` to the location of your version variable inside any Python file::
+.. |conda-forge Version| image:: https://img.shields.io/conda/vn/conda-forge/python-semantic-release?logo=anaconda
+   :target: https://anaconda.org/conda-forge/python-semantic-release
+   :alt: conda-forge
 
-   [semantic_release]
-   version_variable = setup.py:__version__
+.. |Last Release| image:: https://img.shields.io/github/release-date/python-semantic-release/python-semantic-release?display_date=published_at
+   :target: https://github.com/python-semantic-release/python-semantic-release/releases/latest
+   :alt: GitHub Release Date
 
-.. seealso::
-   - :ref:`config-version_toml` - use `tomlkit <https://github.com/sdispater/tomlkit>`_ to read and update
-     the version number in a TOML file.
-   - :ref:`config-version_pattern` - use regular expressions to keep the
-     version number in a different format.
-   - :ref:`config-version_source` - store the version using Git tags.
+.. |PSR License| image:: https://img.shields.io/pypi/l/python-semantic-release?color=blue
+   :target: https://github.com/python-semantic-release/python-semantic-release/blob/master/LICENSE
+   :alt: PyPI - License
 
-Setting up commit parsing
--------------------------
+.. |Issues| image:: https://img.shields.io/github/issues/python-semantic-release/python-semantic-release
+   :target: https://github.com/python-semantic-release/python-semantic-release/issues
+   :alt: GitHub Issues
 
-We rely on commit messages to detect when a version bump is needed.
-By default, Python Semantic Release uses the
-`Angular style <https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits>`_.
-You can find out more about this on :ref:`commit-log-parsing`.
-
-.. seealso::
-   - :ref:`config-branch` - change the default branch name.
-
-Setting up the changelog
-------------------------
-
-If you already have a `CHANGELOG.md`, you will need to insert a
-placeholder tag so we know where to write new versions::
-
-   <!--next-version-placeholder-->
-
-If you don't have a changelog file then one will be set up like this automatically.
-
-.. seealso::
-   - :ref:`config-changelog_file` - use a file other than `CHANGELOG.md`.
-   - :ref:`config-changelog_placeholder` - use a different placeholder.
-
-Releasing on GitHub / GitLab
-----------------------------
-
-Some options and environment variables need to be set in order to push
-release notes and new versions to GitHub / GitLab:
-
-- :ref:`config-hvcs` - change this if you are using GitLab.
-- :ref:`env-gh_token` - GitHub personal access token.
-- :ref:`env-gl_token` - GitLab personal access token.
-
-Releasing on PyPI
------------------
-
-Unless you disable :ref:`config-upload_to_pypi`, Python Semantic Release will
-publish new versions on PyPI. This requires you to obtain an API token
-`here <https://pypi.org/help/#apitoken>`_ and store it in the environment
-variable :ref:`env-pypi_token`.
-
-.. include:: commands.rst
-
-.. _running-from-setuppy:
-
-Running from setup.py
----------------------
-
-Add the following hook to your ``setup.py`` and you will be able to run
-``python setup.py <command>`` as you would ``semantic-release <command>``::
-
-   try:
-       from semantic_release import setup_hook
-       setup_hook(sys.argv)
-   except ImportError:
-       pass
-
-Running on CI
--------------
-
-Getting a fully automated setup with releases from CI can be helpful for some
-projects.  See :ref:`automatic`.
+.. |Monthly Downloads| image:: https://img.shields.io/pypi/dm/python-semantic-release
+   :target: https://pypistats.org/packages/python-semantic-release
+   :alt: PyPI - Downloads
 
 
 Documentation Contents
@@ -112,11 +58,19 @@ Documentation Contents
 .. toctree::
    :maxdepth: 1
 
-   configuration
-   envvars
-   commands
-   commit-log-parsing
-   automatic-releases/index
-   troubleshooting
-   contributors
-   Internal API <api/modules>
+   What's New <misc/psr_changelog>
+   Concepts <concepts/index>
+   CLI <api/commands>
+   configuration/index
+   upgrading/index
+   misc/troubleshooting
+   API <api/modules/modules>
+   Contributing <contributing/index>
+   View on GitHub <https://github.com/python-semantic-release/python-semantic-release>
+
+----
+
+.. _inline-getting-started-guide:
+
+.. include:: concepts/getting_started.rst
+   :start-after: .. _getting-started-guide:
